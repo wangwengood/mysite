@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block title %}
 首页 | 博客
 {% endblock %}
+{% block nav_home_active %}active{% endblock %}
+{% block header_extends %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+{% endblock %}
 {% block content %}
-<h3>欢迎来到我的网站,随便看</h3>
+<h3 class="shouye">欢迎来到我的网站,随便看</h3>
 {% endblock %}
