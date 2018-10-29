@@ -1,0 +1,10 @@
+body{
+    margin-top: 70px!important;
+}
+ul.blog-types{
+    list-style-type: none
+}
+div.blog:not(:last-child){margin-bottom: 2em;padding-bottom: 1em;border-bottom: 1px solid #eee}
+ul.blog-info-detail{margin-bottom: 1em;list-style-type: none;padding-left: 0px}
+ul.blog-info-detail li{display: inline-block;margin-right: 2em}
+div.blog-content{text-indent: 2em}
