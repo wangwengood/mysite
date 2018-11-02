@@ -14,10 +14,32 @@
                     <li>发表时间 : {{ blog.created_time| date:"Y-m-d H:i:s" }}</li>
                     <li>最后修改时间 : {{ blog.last_updated_time| date:"Y-m-d H:i:s" }}</li>
                     <li>分类 : <a href="{% url 'blog_with_type' blog.blog_type.pk %}">{{ blog.blog_type }}</a></li>
+                    <li>阅读 : ({{ blog.read_num }})</li>
                 </ul>
-<div class="blog-content">
-    <p>{{ blog.content }}</p>
-</div>
+                <div class="blog-content">
+                    <p>{{ blog.content|safe }}</p>
+                </div>
+                <nav aria-label="...">
+                    <ul class="pager">
+
+                        {% if blog_previous %}
+                            <li class="next"><a
+                                    href="{% url 'blog_detail' blog_previous.pk %}">下一篇:{{ blog_previous.title }}</a>
+                            </li>
+                        {% else %}
+                            <li class="next disabled"><a href="">没有了</a></li>
+                        {% endif %}
+
+                        {% if blog_next %}
+                            <li class="previous"><a
+                                    href="{% url 'blog_detail' blog_next.pk %}">上一篇: {{ blog_next.title }}</a></li>
+                        {% else %}
+                            <li class="previous disabled"><a href="">没有了</a></li>
+                        {% endif %}
+
+
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

@@ -20,11 +20,13 @@
                         {% for blog in blogs %}
                             <div class="blog">
                                 <h3><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></h3>
-                                <p>{{ blog.content|truncatechars:130 }}</p>
+                                <p>{{ blog.content|striptags|truncatechars:130 }}</p>
                                 <p class="blog-info"><span class="glyphicon glyphicon-tag"></span><a
                                         href="{% url 'blog_with_type' blog.blog_type.pk %}">{{ blog.blog_type }}</a>
                                     <span class="glyphicon glyphicon-time"></span>{{ blog.created_time }}
+                                    <span>阅读:({{ blog.read_num }})</span>
                                 </p>
+
                             </div>
                         {% empty %}
                             <div class="blog">
@@ -77,14 +79,25 @@
                         <ul class="blog-types">
                             {% for type in blog_types %}
                                 <li class="list-group"><a
-                                        href="{% url 'blog_with_type' type.pk %}">{{ type.type_name }}</a></li>
+                                        href="{% url 'blog_with_type' type.pk %}">{{ type.type_name }}({{ type.blog_count }})</a></li>
                             {% empty %}
                                 <li>暂无博客</li>
                             {% endfor %}
                         </ul>
                     </div>
                 </div>
+            <div class="panel panel-default">
+                    <div class="panel-heading">日期分类</div>
+                    <div class="panel-body">
+                        <ul class="blog-types">
+                            {% for i, v in blog_date.items %}
+                            <li class="list-group"><a href="{% url 'blogs_with_date' i.year i.month %}">{{ i|date:"Y年m月" }}({{ v }})</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 {% endblock %}
